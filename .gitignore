@@ -1,7 +1,0 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
-
-/IRIS.CrmConnector/IRIS.CrmConnector.API/wwwroot/files
-/~$*.xlsx
-CrmConnectorUi/.VSCodeCounter/**
