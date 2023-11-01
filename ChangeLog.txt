@@ -1,0 +1,5 @@
+
+1.0.1 hotfix
+2022-11
+
+Assign button -> passed only CustomerGUID as API parameters, all other parameters (ID Number, SPA Acct No., Anonymous) set to either NULL or False.

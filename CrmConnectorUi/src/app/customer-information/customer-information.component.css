@@ -1,0 +1,26 @@
+.customer-info-field strong{
+    margin-right: 5px;
+}
+.customer-info-field{
+    margin-bottom: 0px;
+}
+.customer-info-field:last-child{
+    margin-top: 0px;
+    /* background-color: pink; */
+}
+.manual-verification{
+    color:red;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+.custom-tooltip-class .tooltip-inner {
+    min-width: 400px !important;
+    opacity: 1 !important;
+}
+.custom-tooltip-class .tooltip-inner table{
+    background-color: white;
+}
+.custom-tooltip-class .tooltip.in {
+    opacity: 1 !important;
+    filter: alpha(opacity=100);
+}

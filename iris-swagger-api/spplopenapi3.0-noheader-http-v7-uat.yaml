@@ -1,0 +1,392 @@
+openapi: 3.0.3
+info:
+  title: SPPL SVCS API
+  version: '1.0'
+servers:
+  - url: http://svcsintuatirisservice.sgpoolz.com.sg
+paths:
+  /svcsirissit/GetCustomer:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCustomer'
+      responses:
+        '200':
+          description: Successful operation.
+
+  /svcsirissit/FindCustomer:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FindCustomer'
+      responses:
+        '200':
+          description: Successful operation.
+
+  /svcsirissit/CreateCase:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCase'
+      responses:
+        '200':
+          description: Successful operation.
+
+  /svcsirissit/UpdateCase:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCase'
+      responses:
+        '200':
+          description: Successful operation.
+
+  /svcsirissit/GetCaseAndActivitiesHistory:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCaseAndActivitiesHistory'
+      responses:
+        '200':
+          description: Successful operation.
+
+  /svcsirissit/GetCategoryAndCriteria:
+    get:
+      responses:
+        '200':
+          description: Successful operation.
+
+  /svcsirissit/GenerateOTP:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateOTP'
+      responses:
+        '200':
+          description: Successful operation.
+
+  /svcsirissit/ChallengeOTP:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateOTP'
+      responses:
+        '200':
+          description: Successful operation.
+          
+components:
+  schemas:
+    GetCustomer:
+      type: object
+      required:
+        - DataSet
+        - TriggeredFrom
+        - TriggeredBy
+      properties:
+        IDNumber:
+          type: string
+          maxLength: 7
+          nullable: true
+        CustomerGUID:
+          format: uuid
+          type: string
+          nullable: true
+          maxLength: 36
+        SPAAccountNumber:
+          type: string
+          maxLength: 9
+          nullable: true
+        Anonymous:
+          type: boolean
+          nullable: true
+        DataSet:
+          type: string
+          enum: 
+            - FullData
+            - Subset
+        TriggeredFrom:
+          type: string
+          maxLength: 100
+        TriggeredBy:
+          type: string
+          maxLength: 100
+          
+    FindCustomer:
+      type: object
+      required:
+        - TriggeredFrom
+        - TriggeredBy
+      properties:
+        CustomerName:
+          type: string
+          maxLength: 338
+          nullable: true
+        IDNumber:
+          type: string
+          maxLength: 20
+          nullable: true
+        AccountNumber:
+          type: string
+          maxLength: 9
+          nullable: true
+        MobileNo:
+          type: string
+          maxLength: 20
+          nullable: true
+        EmailAddress:
+          type: string
+          format: email
+          maxLength: 100
+          nullable: true
+        TriggeredFrom:
+          type: string
+          maxLength: 100
+        TriggeredBy:
+          type: string
+          maxLength: 100
+    CreateCase:
+      type: object
+      required:
+        - CustomerGUID
+        - CaseTitle
+        - CaseDetails
+        - SystemAuthenticated
+        - DateTimeReceived
+        - IPCCCallExtensionID
+        - PrimaryCaseOfficer
+        - Owner
+        - CaseCategory1
+        - CaseCategory2
+        - CaseCategory3
+        - ContactMode
+        - CreatedBy
+        - CreatedOn
+        - ModifiedBy
+        - CallBack
+        - TriggeredFrom
+        - TriggeredBy
+      properties:
+        CustomerGUID:
+          format: uuid
+          type: string
+          maxLength: 36
+        CaseTitle:
+          type: string
+          maxLength: 300
+        CaseDetails:
+          type: string
+          maxLength: 10000
+        SystemAuthenticated:
+          type: boolean
+        DateTimeReceived:
+          format: date-format
+          pattern: '(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/\d{4} ([0-1][0-9]|2[0-3])\:[0-5][0-9]\:[0-5][0-9]$'
+          type: string
+          maxLength: 19
+        IPCCCallExtensionID:
+          type: string
+          maxLength: 36
+        PrimaryCaseOfficer:
+          type: string
+          maxLength: 100
+        Owner:
+          type: string
+          maxLength: 100
+        CaseCategory1:
+          format: uuid
+          type: string
+          maxLength: 36
+        CaseCategory2:
+          format: uuid
+          type: string
+          maxLength: 36
+        CaseCategory3:
+          format: uuid
+          type: string
+          maxLength: 36
+        ContactMode:
+          type: string
+          maxLength: 20
+          enum: 
+            - "Phone(Inbound)" 
+            - "Phone(Outbound)"
+        CreatedBy:
+          type: string
+          maxLength: 100
+        CreatedOn:
+          format: date-format
+          pattern: '(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/\d{4} ([0-1][0-9]|2[0-3])\:[0-5][0-9]\:[0-5][0-9]$'
+          type: string
+          maxLength: 19
+        ModifiedBy:
+          type: string
+          maxLength: 100
+        CallBack:
+          type: boolean
+        TriggeredFrom:
+          type: string
+          maxLength: 100
+        TriggeredBy:
+          type: string
+          maxLength: 100
+    UpdateCase:
+      type: object
+      required:
+        - CaseID
+        - CustomerGUID
+        - CaseTitle
+        - CaseDetails
+        - SystemAuthenticated
+        - ManualVerification
+        - IPCCCallExtensionID
+        - Owner
+        - CaseCategory1
+        - CaseCategory2
+        - CaseCategory3
+        - AdHocCriteria
+        - FollowupAction
+        - ContactMode
+        - ModifiedBy
+        - FollowupRequired
+        - CaseStatus
+        - Resolution
+        - TriggeredFrom
+        - TriggeredBy
+      properties:
+        CaseID:
+          type: string
+          maxLength: 100
+        CustomerGUID:
+          format: uuid
+          type: string
+          maxLength: 36
+        CaseTitle:
+          type: string
+          maxLength: 300
+        CaseDetails:
+          type: string
+          maxLength: 10000
+        SystemAuthenticated:
+          type: boolean
+        ManualVerification:
+          type: boolean
+        IPCCCallExtensionID:
+          type: string
+          maxLength: 36
+        Owner:
+          type: string
+          maxLength: 100
+        CaseCategory1:
+          format: uuid
+          type: string
+          maxLength: 36
+        CaseCategory2:
+          format: uuid
+          type: string
+          maxLength: 36
+        CaseCategory3:
+          format: uuid
+          type: string
+          maxLength: 36
+        AdHocCriteria:
+          format: uuid
+          type: string
+          nullable: true
+          maxLength: 36
+        FollowupAction:
+          type: string
+          maxLength: 20000
+        ContactMode:
+          type: string
+          maxLength: 20
+          enum: 
+            - "Phone(Inbound)" 
+            - "Phone(Outbound)"
+        ModifiedBy:
+          type: string
+          maxLength: 100
+        FollowupRequired:
+          type: boolean
+        CaseStatus:
+          type: string
+          maxLength: 20
+          enum: 
+            - "In-Progress" 
+            - "Resolved"
+        Resolution:
+          type: string
+          maxLength: 200
+          nullable: true
+        TriggeredFrom:
+          type: string
+          maxLength: 100
+        TriggeredBy:
+          type: string
+          maxLength: 100
+    GetCaseAndActivitiesHistory:
+      type: object
+      required:
+        - CustomerGUID
+        - TriggeredFrom
+        - TriggeredBy
+      properties:
+        CustomerGUID:
+          format: uuid
+          type: string
+          maxLength: 36
+        TriggeredFrom:
+          type: string
+          maxLength: 100
+        TriggeredBy:
+          type: string
+          maxLength: 100
+    GenerateOTP:
+      type: object
+      required:
+        - Mobile
+        - TriggeredFrom
+        - TriggeredBy
+      properties:
+        Mobile:
+          type: string
+          maxLength: 20
+        TriggeredFrom:
+          type: string
+          maxLength: 100
+        TriggeredBy:
+          type: string
+          maxLength: 100
+    ValidateOTP:
+      type: object
+      required:
+        - Mobile
+        - OTPValidate
+        - TriggeredFrom
+        - TriggeredBy
+      properties:
+        Mobile:
+          type: string
+          maxLength: 20
+        OTPValidate:
+          type: string
+          maxLength: 6
+        TriggeredFrom:
+          type: string
+          maxLength: 100
+        TriggeredBy:
+          type: string
+          maxLength: 100

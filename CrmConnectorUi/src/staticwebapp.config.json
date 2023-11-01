@@ -1,0 +1,16 @@
+{
+    "navigationFallback": {
+        "rewrite": "index.html"
+    },
+    "mimeTypes": {
+        ".json": "text/json"
+    },
+    "routes":[
+        {
+            "route": "*",
+            "headers": {
+              "Content-Security-Policy": "frame-ancestors https://desktop.wxcc-anz1.cisco.com"
+            }
+        }
+    ]
+}

@@ -1,0 +1,476 @@
+---
+openapi: 3.0.3
+info:
+  title: SPPL SVCS API 1.0 - Modified by Sache
+  version: "1.0"
+servers:
+- url: http://svcsintuatirisservice.sgpoolz.com.sg
+paths:
+  /svcsirissit/GetCustomer:
+    post:
+      parameters:
+      - name: X-Source
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: WEBEX
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCustomer'
+      responses:
+        "200":
+          description: Successful operation.
+      security:
+      - basicAuth: []
+  /svcsirissit/FindCustomer:
+    post:
+      parameters:
+      - name: X-Source
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: WEBEX
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FindCustomer'
+      responses:
+        "200":
+          description: Successful operation.
+      security:
+      - basicAuth: []
+  /svcsirissit/CreateCase:
+    post:
+      parameters:
+      - name: X-Source
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: WEBEX
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCase'
+      responses:
+        "200":
+          description: Successful operation.
+      security:
+      - basicAuth: []
+  /svcsirissit/UpdateCase:
+    post:
+      parameters:
+      - name: X-Source
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: WEBEX
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCase'
+      responses:
+        "200":
+          description: Successful operation.
+      security:
+      - basicAuth: []
+  /svcsirissit/GetCaseAndActivitiesHistory:
+    post:
+      parameters:
+      - name: X-Source
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: WEBEX
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCaseAndActivitiesHistory'
+      responses:
+        "200":
+          description: Successful operation.
+      security:
+      - basicAuth: []
+  /svcsirissit/GetCategoryAndCriteria:
+    get:
+      parameters:
+      - name: X-Source
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: WEBEX
+      responses:
+        "200":
+          description: Successful operation.
+      security:
+      - basicAuth: []
+  /svcsirissit/GenerateOTP:
+    post:
+      parameters:
+      - name: X-Source
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: WEBEX
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateOTP'
+      responses:
+        "200":
+          description: Successful operation.
+      security:
+      - basicAuth: []
+  /svcsirissit/ChallengeOTP:
+    post:
+      parameters:
+      - name: X-Source
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: WEBEX
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateOTP'
+      responses:
+        "200":
+          description: Successful operation.
+      security:
+      - basicAuth: []
+components:
+  schemas:
+    GetCustomer:
+      required:
+      - DataSet
+      - TriggeredBy
+      - TriggeredFrom
+      type: object
+      properties:
+        IDNumber:
+          maxLength: 7
+          type: string
+          nullable: true
+        CustomerGUID:
+          maxLength: 36
+          type: string
+          format: uuid
+          nullable: true
+        SPAAccountNumber:
+          maxLength: 9
+          type: string
+          nullable: true
+        Anonymous:
+          type: boolean
+          nullable: true
+        DataSet:
+          type: string
+          enum:
+          - FullData
+          - Subset
+        TriggeredFrom:
+          maxLength: 100
+          type: string
+        TriggeredBy:
+          maxLength: 100
+          type: string
+    FindCustomer:
+      required:
+      - TriggeredBy
+      - TriggeredFrom
+      type: object
+      properties:
+        CustomerName:
+          maxLength: 338
+          type: string
+          nullable: true
+        IDNumber:
+          maxLength: 7
+          type: string
+          nullable: true
+        AccountNumber:
+          maxLength: 9
+          type: string
+          nullable: true
+        MobileNo:
+          maxLength: 20
+          type: string
+          nullable: true
+        EmailAddress:
+          maxLength: 100
+          type: string
+          format: email
+          nullable: true
+        TriggeredFrom:
+          maxLength: 100
+          type: string
+        TriggeredBy:
+          maxLength: 100
+          type: string
+    CreateCase:
+      required:
+      - CallBack
+      - CaseCategory1
+      - CaseCategory2
+      - CaseCategory3
+      - CaseDetails
+      - CaseTitle
+      - ContactMode
+      - CreatedBy
+      - CreatedOn
+      - CustomerGUID
+      - DateTimeReceived
+      - IPCCCallExtensionID
+      - ModifiedBy
+      - Owner
+      - PrimaryCaseOfficer
+      - SystemAuthenticated
+      - TriggeredBy
+      - TriggeredFrom
+      type: object
+      properties:
+        CustomerGUID:
+          maxLength: 36
+          type: string
+          format: uuid
+        CaseTitle:
+          maxLength: 300
+          type: string
+        CaseDetails:
+          maxLength: 10000
+          type: string
+        SystemAuthenticated:
+          type: boolean
+        DateTimeReceived:
+          maxLength: 19
+          pattern: (0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/\d{4} ([0-1][0-9]|2[0-3])\:[0-5][0-9]\:[0-5][0-9]$
+          type: string
+          format: date-format
+        IPCCCallExtensionID:
+          maxLength: 100
+          type: string
+        PrimaryCaseOfficer:
+          maxLength: 100
+          type: string
+        Owner:
+          maxLength: 100
+          type: string
+        CaseCategory1:
+          maxLength: 36
+          type: string
+          format: uuid
+        CaseCategory2:
+          maxLength: 36
+          type: string
+          format: uuid
+        CaseCategory3:
+          maxLength: 36
+          type: string
+          format: uuid
+        ContactMode:
+          maxLength: 20
+          type: string
+          enum:
+          - Phone(Inbound)
+          - Phone(Outbound)
+        CreatedBy:
+          maxLength: 100
+          type: string
+        CreatedOn:
+          maxLength: 19
+          pattern: (0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/\d{4} ([0-1][0-9]|2[0-3])\:[0-5][0-9]\:[0-5][0-9]$
+          type: string
+          format: date-format
+        ModifiedBy:
+          maxLength: 100
+          type: string
+        CallBack:
+          type: boolean
+        TriggeredFrom:
+          maxLength: 100
+          type: string
+        TriggeredBy:
+          maxLength: 100
+          type: string
+    UpdateCase:
+      required:
+      - AdHocCriteria
+      - CaseCategory1
+      - CaseCategory2
+      - CaseCategory3
+      - CaseDetails
+      - CaseID
+      - CaseStatus
+      - CaseTitle
+      - ContactMode
+      - CustomerGUID
+      - FollowupAction
+      - FollowupRequired
+      - IPCCCallExtensionID
+      - ManualVerification
+      - ModifiedBy
+      - Owner
+      - Resolution
+      - SystemAuthenticated
+      - TriggeredBy
+      - TriggeredFrom
+      type: object
+      properties:
+        CaseID:
+          maxLength: 100
+          type: string
+        CustomerGUID:
+          maxLength: 36
+          type: string
+          format: uuid
+        CaseTitle:
+          maxLength: 300
+          type: string
+        CaseDetails:
+          maxLength: 10000
+          type: string
+        SystemAuthenticated:
+          type: boolean
+        ManualVerification:
+          type: boolean
+        IPCCCallExtensionID:
+          maxLength: 32
+          type: string
+        Owner:
+          maxLength: 100
+          type: string
+        CaseCategory1:
+          maxLength: 36
+          type: string
+          format: uuid
+        CaseCategory2:
+          maxLength: 36
+          type: string
+          format: uuid
+        CaseCategory3:
+          maxLength: 36
+          type: string
+          format: uuid
+        AdHocCriteria:
+          maxLength: 36
+          type: string
+          format: uuid
+          nullable: true
+        FollowupAction:
+          maxLength: 20000
+          type: string
+        ContactMode:
+          maxLength: 20
+          type: string
+          enum:
+          - Phone(Inbound)
+          - Phone(Outbound)
+        ModifiedBy:
+          maxLength: 100
+          type: string
+        FollowupRequired:
+          type: boolean
+        CaseStatus:
+          maxLength: 20
+          type: string
+          enum:
+          - In-Progress
+          - Resolved
+        Resolution:
+          maxLength: 200
+          type: string
+          nullable: true
+        TriggeredFrom:
+          maxLength: 100
+          type: string
+        TriggeredBy:
+          maxLength: 100
+          type: string
+    GetCaseAndActivitiesHistory:
+      required:
+      - CustomerGUID
+      - TriggeredBy
+      - TriggeredFrom
+      type: object
+      properties:
+        CustomerGUID:
+          maxLength: 36
+          type: string
+          format: uuid
+        TriggeredFrom:
+          maxLength: 100
+          type: string
+        TriggeredBy:
+          maxLength: 100
+          type: string
+    GenerateOTP:
+      required:
+      - Mobile
+      - TriggeredBy
+      - TriggeredFrom
+      type: object
+      properties:
+        Mobile:
+          maxLength: 20
+          type: string
+        TriggeredFrom:
+          maxLength: 100
+          type: string
+        TriggeredBy:
+          maxLength: 100
+          type: string
+    ValidateOTP:
+      required:
+      - Mobile
+      - OTPValidate
+      - TriggeredBy
+      - TriggeredFrom
+      type: object
+      properties:
+        Mobile:
+          maxLength: 20
+          type: string
+        OTPValidate:
+          maxLength: 6
+          type: string
+        TriggeredFrom:
+          maxLength: 100
+          type: string
+        TriggeredBy:
+          maxLength: 100
+          type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic

@@ -1,0 +1,9 @@
+html {
+    min-height: 100%;
+    display: flex;
+}
+
+body {
+    margin-top: 10px !important;
+    flex: 1;
+}

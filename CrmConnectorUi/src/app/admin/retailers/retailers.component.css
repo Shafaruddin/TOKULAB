@@ -1,0 +1,7 @@
+.table-bordered > td {
+    width: 1px;
+    border: 1px red !important;
+}
+td {
+    border: 1px dotted #999;
+}

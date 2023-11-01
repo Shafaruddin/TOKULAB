@@ -1,0 +1,48 @@
+<form class="form-horizontal col-12 col-lg-6 col-xl-6" [formGroup]="updateStatusFlagForm" autocomplete="off"
+    (ngSubmit)="onSubmit()">
+    <fieldset>
+        <div class="form-group row">
+            <label for="name" class="col-form-label col-form-label-sm col-4">Code:</label>
+            <div class="col-8">
+                <input type="text" style="text-transform: uppercase;" formControlName="code" class="form-control form-control-sm">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="identificatioNo" class="col-form-label col-form-label-sm col-4">Description:</label>
+            <div class="col-8">
+                <input formControlName="description" type="text" class="form-control form-control-sm">
+            </div>
+        </div>
+        <div class="form-group row text-end">
+            <button [buttonBusy]="loading" [disabled]="!updateStatusFlagForm.valid" name="submit" type="submit"
+                class="col-8 btn btn-sm btn-primary">Add/Update</button>
+            <button name="reset" type="reset" class="col-4 btn btn-sm btn-default">Reset</button>
+        </div>
+    </fieldset>
+</form>
+<hr />
+<div class="table-responsive">
+    <table [busyIf]="loading" class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="statusFlags?.length > 0">
+            <tr *ngFor="let statusFlag of statusFlags">
+                <td>{{ statusFlag.code }}</td>
+                <td>{{ statusFlag.description }}</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" (click)="edit(statusFlag)">Edit</a>&nbsp;
+                    <a class="btn btn-danger btn-sm" (click)="delete(statusFlag)">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="(!statusFlags?.length || !statusFlags)">
+            <tr>
+                <td colspan="3" class="text-center">-</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

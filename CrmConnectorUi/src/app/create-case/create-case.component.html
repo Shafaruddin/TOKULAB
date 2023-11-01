@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row">
+        <div class="col-7">
+            <!-- <div class="row">
+                <button type="button" class="btn btn-sm badge rounded-pill bg-light col-4">KMS Articles</button>
+            </div>
+            <div class="row" style="height: 20px;"></div> -->
+            <div class="row">
+                <div class="col-6">
+                    <p *ngIf="appConsts.ciscoParameters.caseId">
+                        <strong>Case ID:</strong> {{ appConsts.ciscoParameters.caseId }}
+                        <!-- <a 
+                            type="button" 
+                            class="btn btn-sm btn-link"
+                            [routerLink]="['../']" 
+                            [queryParams]="appConsts.ciscoParameters"
+                        >update case</a> -->
+                    </p>
+                    <p *ngIf="!appConsts.ciscoParameters.caseId"><strong>Case ID:</strong> (Not Created Yet)</p>
+                </div>
+                <div class="col-6 text-end" *ngIf="!isAnonymousCustomer">
+                    <button type="button" class="btn btn-sm btn-link" (click)="caseHistoryAndActivitiesPopup()">Case
+                        History &amp;
+                        Activities</button>
+                </div>
+            </div>
+            <app-create-case-form [customer]="caseCustomer" [caseId]="appConsts.ciscoParameters.caseId"
+                [isAnonymous]="isAnonymousCustomer" [manualAuthenticated]="manualAuthenticated"
+                (caseUpdatedEvent)="caseUpdatedEventHandler($event)"></app-create-case-form>
+        </div>
+        <div class="col-5">
+            <div class="row">
+                <h6 class="col-4">Customer Info</h6>
+                <div class="col-8 text-end">
+                    <button class="btn btn-sm badge rounded-pill bg-light" (click)="findCustomerPopup()"
+                        [disabled]="caseUpdated">Find Customer</button>
+                    <button class="btn btn-sm badge rounded-pill bg-light" (click)="loadAnonymousCustomer()"
+                        [disabled]="caseUpdated">Anonymous Customer</button>
+                </div>
+            </div>
+            <br />
+            <app-customer-information [customer]="caseCustomer" [caseUpdated]="caseUpdated"
+                (manualAuthenticateChange)="manualAuthenticatedFieldChanged($event)">
+            </app-customer-information>
+        </div>
+    </div>
+</div>
+<!-- <hr />
+  <h6>Test OTP Scenarios</h6>
+  <button *ngFor="let record of tempAuthenticateTestPhoneNumbers" (click)="authenticatePopup(record)">auth {{ record
+    }}</button>
+  <br>
+  <button class="btn btn-sm badge rounded-pill bg-light" (click)="loadAnonymousCustomer()">Anonymous</button><br />
+  {{ appConsts.ciscoParameters | json }} -->

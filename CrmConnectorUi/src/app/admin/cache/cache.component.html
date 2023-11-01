@@ -1,0 +1,7 @@
+<div class="row" [busyIf]="loading">
+    <div class="col-4" *ngFor="let cacheName of caches">
+        <a class="btn btn-warning btn-sm" [buttonBusy]="loading" (click)="clearCache(cacheName)">
+            Clear {{cacheName}} Cache
+        </a>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<p class="customer-info-field"><strong>Account Number:</strong><span *ngIf="customer">{{ customer.accountNumber
+        }}</span></p>
+<div class="row">
+    <p class="customer-info-field col-6"><strong>Account Status:</strong><span *ngIf="customer">{{
+            customer.accountStatus }}</span></p>
+    <div class="btn-group btn-group-sm col-6 text-end">
+        <ng-template #statusFlagsTipContent>
+            <table class="table table-light ci-tooltip table-sm" style="margin-bottom: 0px">
+                <thead>
+                    <tr>
+                        <th scope="col"><strong>Status Flag</strong></th>
+                        <th scope="col" class="text-start"><strong>Reason</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let record of customer.statusFlags ? customer.statusFlags : []">
+                        <td class="text-danger"><strong>{{ record.statusFlag }}</strong></td>
+                        <td class="text-start">{{ record.statusChangedReason }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ng-template>
+        <button type="button" *ngIf="customer?.statusFlags && customer?.statusFlags.length > 0" [ngbTooltip]="statusFlagsTipContent" tooltipClass="custom-tooltip-class" placement="auto left" class="btn btn-link text-end">Status Flags</button>
+    </div>
+</div>
+<p class="customer-info-field"><strong>Customer Name:</strong><span *ngIf="customer">{{ customer.salutation }} {{
+        customer.customerName }}</span></p>
+<p class="customer-info-field"><strong>ID number:</strong><span *ngIf="customer?.idNumber">{{ customer.idType ?
+        '('+customer.idType+')' : '-' }} {{ customer.idNumber }}</span></p>
+<p class="customer-info-field"><strong>FIN/Passport Expiry Date:</strong><span *ngIf="customer">{{
+        customer.finPassportExpiryDate }}</span></p>
+<p class="customer-info-field"><strong>Date of Birth:</strong><span *ngIf="customer">{{ customer.dob }}</span></p>
+<p class="customer-info-field"><strong>Email address:</strong><span *ngIf="customer">{{ customer.emailAddress }}</span>
+</p>
+<p class="customer-info-field"><strong>Mobile Number:</strong><span *ngIf="customer">{{ customer.mobileNo }}</span></p>
+<p class="customer-info-field"><strong>Residential Number:</strong><span *ngIf="customer">{{ customer.homePhone
+        }}</span></p>
+<p class="customer-info-field"><strong>Residential Address:</strong></p>
+<p class="customer-info-field" *ngIf="customer">{{ customer.residentialAddress }}</p>
+<br />
+
+<div class="form-group text-end">
+    <div class="col-12">
+        <div>
+            <label class="manual-verification">
+                Manual Verification <input type="checkbox" [disabled]="formDisabled" [(ngModel)]="isManualVerification" (change)="checkValue()">
+            </label>
+        </div>
+    </div>
+</div>
+
+<p class="customer-info-field"><strong>Customer Note:</strong></p>
+<p class="customer-info-field" *ngIf="customer">{{ customer.customerNote }}</p>

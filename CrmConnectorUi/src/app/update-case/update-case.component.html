@@ -1,0 +1,103 @@
+<form class="form-horizontal row" [ngClass]="{'autoSaving' : autoSaveInProgress}" [busyIf]="loading" [formGroup]="updateCaseForm" autocomplete="off"
+(ngSubmit)="onSubmit()">
+    <fieldset>
+        <div class="row">
+            <div class="form-group col-4">
+                <label class="col-form-label col-form-label-sm required" for="caseCategory1">Category 1</label>
+                <div>
+                    <ng-select [items]="cat1Options" 
+                        formControlName="caseCategory1"
+
+                        (clear)="categoriesOnClear(1)"
+                        (change)="categoriesOnChange($event,1)"
+
+                        bindLabel="name" 
+                        bindValue="categoryId" 
+                        class="form-control-sm"
+                        [(ngModel)]="input.caseCategory1" >
+                    </ng-select>
+                </div>
+            </div>
+            <div class="form-group col-4">
+                <label class="col-form-label col-form-label-sm required" for="category2">Category 2</label>
+                <div>
+                    <ng-select [disabled]="!input.caseCategory1" [items]="cat2Options" 
+                        formControlName="caseCategory2"
+
+                        (clear)="categoriesOnClear(2)"
+                        (change)="categoriesOnChange($event,2)"
+
+                        bindLabel="name" 
+                        bindValue="categoryId" 
+                        class="form-control-sm"
+                        [(ngModel)]="input.caseCategory2" >
+                    </ng-select>
+                </div>
+            </div>
+            <div class="form-group col-4">
+                <label class="col-form-label col-form-label-sm required" for="category3">Category 3</label>
+                <div>
+                    <ng-select [items]="cat3Options" 
+                        formControlName="caseCategory3"
+
+                        (clear)="categoriesOnClear(3)"
+                        (change)="categoriesOnChange($event,3)"
+
+                        bindLabel="name" 
+                        bindValue="categoryId" 
+                        class="form-control-sm"
+                        [(ngModel)]="input.caseCategory3" >
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="form-group col-8">
+                <label class="col-form-label col-form-label-sm required">Case Title</label>
+                <div>
+                    <input type="text" formControlName="caseTitle" [(ngModel)]="input.caseTitle" maxlength="300" class="form-control form-control-sm equal-width-as-ngselect">
+                </div>
+            </div>
+            <div class="form-group col-4">
+                <label class="col-form-label col-form-label-sm" for="adHocCriteria">Ad-hoc Criteria</label>
+                <div>
+                    <ng-select [items]="dropdownData.adhocCriteria" 
+                        formControlName="adHocCriteria"
+                        bindLabel="name" 
+                        bindValue="adhocCriteriaId" 
+                        class="form-select form-control-sm"
+                        [(ngModel)]="input.adHocCriteria" >
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="form-group col-12">
+                <label class="col-form-label col-form-label-sm required">Case Details</label>
+                <div>
+                    <textarea formControlName="caseDetails" [(ngModel)]="input.caseDetails" maxlength="10000" type="text" class="form-control" rows="1" autosize></textarea>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="form-group col-12">
+                <label class="col-form-label col-form-label-sm">Follow-up Action</label>
+                <div>
+                    <textarea formControlName="followupAction" maxlength="20000" type="text" class="form-control" rows="1" autosize></textarea>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-12 text-end home-form-button-bar">
+                <button class="btn btn-warning" (click)="submitCallback()" [disabled]="loading || !updateCaseForm.valid">Callback</button>
+                <button class="btn btn-success" (click)="submitNoCallback()" [disabled]="loading || !updateCaseForm.valid">No Callback</button>
+                <button class="btn btn-primary" (click)="submitResolveCase()" [disabled]="loading || !updateCaseForm.valid">Resolve Case</button>
+                <!-- <button class="btn btn-primary" (click)="disableForm()" >DISABLE TEST</button> -->
+            </div>
+        </div>
+    </fieldset>
+</form>

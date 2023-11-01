@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-sm fixed-top navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" [routerLink]="['.']">Administration</a>
+    <div class="">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['./status-flags']">Status Flags
+          </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['./cache']">Cache Management
+          </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['./retailers']">Retailers Management
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <br><br><br><br>
+  <router-outlet></router-outlet>
+</div>

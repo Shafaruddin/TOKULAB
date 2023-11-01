@@ -1,0 +1,41 @@
+<form [busyIf]="loading">
+    <fieldset>
+        <legend>Upload a properly formatted excel file (refer below). Max File Size: 5Mb</legend>
+        <div class="form-group">
+            <label for="formFile" class="form-label mt-4">Browse for an excel file to start uploading</label>
+            <input type="file" class="form-control" (change)="excelFileSelected($event)" #fileUpload>
+        </div>
+    </fieldset>
+</form>
+<hr />
+<h6>Sample Format</h6>
+<table class="table table-responsive">
+    <tr>
+        <td>ID</td>
+        <td>RetailerNo</td>
+        <td>ContactNos</td>
+        <td>OutletName</td>
+        <td>AddressLine1</td>
+        <td>AddressLine2</td>
+        <td>PostalCode</td>
+        <td>AreaManager</td>
+        <td>InCharge</td>
+        <td>OutletStaff</td>
+        <td>EmailAddress</td>
+        <td>FEInChargeByArea</td>
+    </tr>
+    <tr>
+        <td>316</td>
+        <td>111111</td>
+        <td>93821338</td>
+        <td>Activeo Singapore</td>
+        <td>1 Coleman St</td>
+        <td>#06-03 The Adelphi</td>
+        <td>179803</td>
+        <td>Rosaline</td>
+        <td>Michael Quek</td>
+        <td>Someone</td>
+        <td>someone@example.com</td>
+        <td>Noah Tan</td>
+    </tr>
+</table>

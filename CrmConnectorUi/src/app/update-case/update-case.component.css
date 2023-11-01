@@ -1,0 +1,26 @@
+.ng-dirty.ng-invalid > .ng-select-container, ng-select.ng-dirty.ng-invalid > .ng-select-container,textarea.ng-dirty.ng-invalid, input[type=text].ng-dirty.ng-invalid{
+    border-color: red !important;
+    border-radius: 1px;
+    border-width: 1px;
+    box-shadow: none;
+}
+ng-select {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+.ng-dropdown-panel.ng-select-bottom {
+    margin-top: 14px;
+}
+.equal-width-as-ngselect{
+    height: 38px !important;
+}
+.required:after {
+    content:" *";
+    color: red;
+}
+form.autoSaving:after {
+    content: "💾";
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}

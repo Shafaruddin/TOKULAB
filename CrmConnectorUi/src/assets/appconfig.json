@@ -1,0 +1,7 @@
+{
+    "remoteServiceBaseUrl": "https://webappsppluat02.azurewebsites.net",
+    "appBaseUrl": "https://localhost:4200",
+    "title": "Agent Interface - DEV",
+    "instrumentationKey": "b5869971-6179-42e9-9d62-c9a248aa37f3",
+    "uiVersion": "1.0.0"
+}

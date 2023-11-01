@@ -1,0 +1,5 @@
+<ngx-loading-bar ref="http" include-spinner="false"></ngx-loading-bar>
+<ngx-spinner type="ball-clip-rotate" size="medium" color="#5ba7ea">
+    <p *ngIf="ngxSpinnerText">{{ getSpinnerText() }}</p>
+</ngx-spinner>
+<router-outlet></router-outlet>

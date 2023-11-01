@@ -1,0 +1,142 @@
+<form class="form-horizontal row" [busyIf]="loading" [formGroup]="createCaseForm" autocomplete="off"
+(ngSubmit)="onSubmit()">
+    <fieldset>
+        <div class="row">
+            <div class="form-group col-4">
+                <label class="col-form-label col-form-label-sm required" for="caseCategory1">Category 1</label>
+                <div>
+                    <ng-select [items]="cat1Options" 
+                        formControlName="caseCategory1"
+
+                        (clear)="categoriesOnClear(1)"
+                        (change)="categoriesOnChange($event,1)"
+
+                        bindLabel="name" 
+                        bindValue="categoryId" 
+                        class="form-control-sm"
+                        [(ngModel)]="input.caseCategory1" >
+                    </ng-select>
+                </div>
+            </div>
+            <div class="form-group col-4">
+                <label class="col-form-label col-form-label-sm required" for="category2">Category 2</label>
+                <div>
+                    <ng-select [disabled]="!input.caseCategory1" [items]="cat2Options" 
+                        formControlName="caseCategory2"
+
+                        (clear)="categoriesOnClear(2)"
+                        (change)="categoriesOnChange($event,2)"
+
+                        bindLabel="name" 
+                        bindValue="categoryId" 
+                        class="form-control-sm"
+                        [(ngModel)]="input.caseCategory2" >
+                    </ng-select>
+                </div>
+            </div>
+            <div class="form-group col-4">
+                <label class="col-form-label col-form-label-sm required" for="category3">Category 3</label>
+                <div>
+                    <ng-select [items]="cat3Options" 
+                        formControlName="caseCategory3"
+
+                        (clear)="categoriesOnClear(3)"
+                        (change)="categoriesOnChange($event,3)"
+
+                        bindLabel="name" 
+                        bindValue="categoryId" 
+                        class="form-control-sm"
+                        [(ngModel)]="input.caseCategory3" >
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="form-group col-8">
+                <label class="col-form-label col-form-label-sm required">Case Title</label>
+                <div>
+                    <input type="text" formControlName="caseTitle" [(ngModel)]="input.caseTitle" maxlength="300" class="form-control form-control-sm equal-width-as-ngselect">
+                </div>
+            </div>
+            <div class="form-group col-4">
+                <label class="col-form-label col-form-label-sm" for="contactMode">Contact Mode</label>
+                <div>
+                    <ng-select [items]="contactModes" 
+                        formControlName="contactMode"
+                        bindLabel="name" 
+                        bindValue="value" 
+                        class="form-select form-control-sm"
+                        [(ngModel)]="input.contactMode" >
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="form-group col-12">
+                <label class="col-form-label col-form-label-sm required">Case Details</label>
+                <div>
+                    <textarea formControlName="caseDetails" [(ngModel)]="input.caseDetails" maxlength="10000" type="text" class="form-control" rows="1" autosize></textarea>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="form-group col-5" *ngIf="!consts.ciscoParameters.iPCCCallExtensionID">
+                <label class="col-form-label col-form-label-sm required">IPCC Call Extension ID</label>
+                <div>
+                    <input type="text" formControlName="ipccCallExtensionID" [(ngModel)]="input.ipccCallExtensionID" maxlength="36" class="form-control form-control-sm equal-width-as-ngselect">
+                </div>
+            </div>
+            <div class="form-group col-4">
+                <div class="form-check">
+                    <input class="form-check-input" formControlName="systemAuthenticated" [(ngModel)]="input.systemAuthenticated" type="checkbox">
+                    <label class="form-check-label form-check-label-sm" for="systemAuthenticated">
+                        System Authenticated
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-3">
+                <div class="form-check">
+                    <input class="form-check-input" formControlName="callBack" [(ngModel)]="input.callBack" type="checkbox">
+                    <label class="form-check-label form-check-label-sm" for="callBack">
+                        Call Back
+                    </label>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="form-group col-12" *ngIf="!consts.ciscoParameters.agentUsername">
+            <label class="col-form-label col-form-label-sm required">Primary Case Officer</label>
+            <div>
+                <input type="text" formControlName="primaryCaseOfficer" [(ngModel)]="input.primaryCaseOfficer" maxlength="100" class="form-control form-control-sm equal-width-as-ngselect">
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <!-- <div class="form-group col-6" *ngIf="!consts.ciscoParameters.agentUsername"> -->
+            <div class="form-group col-6" *ngIf="!consts.ciscoParameters.agentUsername">
+                <label class="col-form-label col-form-label-sm required">Agent Username</label>
+                <div>
+                    <input type="text" formControlName="createdBy" [(ngModel)]="input.createdBy" maxlength="100" class="form-control form-control-sm equal-width-as-ngselect">
+                </div>
+            </div>
+            <!-- <div class="form-group col-6" *ngIf="!consts.ciscoParameters.agentName"> -->
+            <div class="form-group col-6" *ngIf="!consts.ciscoParameters.agentName">
+                <label class="col-form-label col-form-label-sm required">Agent Name</label>
+                <div>
+                    <input type="text" formControlName="triggeredBy" [(ngModel)]="input.triggeredBy" maxlength="100" class="form-control form-control-sm equal-width-as-ngselect">
+                </div>
+            </div>
+        </div>
+        
+        <br />
+        <div class="form-group">
+            <div class="col-12 text-end home-form-button-bar">
+                <button class="btn btn-success" (click)="createCase()" [disabled]="loading || !createCaseForm.valid">Create Case</button>
+                <!-- <button class="btn btn-primary" (click)="disableForm()" >DISABLE TEST</button> -->
+            </div>
+        </div>
+    </fieldset>
+</form>

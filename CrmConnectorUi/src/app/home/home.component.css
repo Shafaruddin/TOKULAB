@@ -1,0 +1,10 @@
+.top-labels .label{
+    margin-right: 10px;
+}
+.control-label.required::after {
+    content: " *";
+    color: red;
+}
+.home-form-button-bar button{
+    margin-left: 10px;
+}
